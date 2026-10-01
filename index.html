@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- "viewport" : indique au téléphone d'utiliser la vraie largeur de l'écran -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Pawly – Ses soins. Ses souvenirs. Son histoire.</title>
+
+  <!-- Police Nunito (Google Fonts, nécessite internet) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Feuilles de style : logo.css d'abord, puis style.css qui l'utilise -->
+  <link rel="stylesheet" href="css/logo.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Ce script est volontairement ici, dans le <head> : il applique le thème
+       choisi AVANT l'affichage de la page, pour éviter un flash de couleur. -->
+  <script src="js/theme.js"></script>
+</head>
+<body>
+
+  <!-- ============ EN-TÊTE ============ -->
+  <header class="site">
+    <div class="wrap bar">
+      <!-- Le logo est dessiné en CSS (classe "lm lm-word"), voir logo.css -->
+      <a href="#top" aria-label="Pawly, retour en haut de page"><span class="lm lm-word" role="img" aria-label="Pawly"></span></a>
+
+      <nav class="links" aria-label="Navigation principale">
+        <a href="#fonctions">Le carnet</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="#faq">Questions</a>
+      </nav>
+
+      <div class="actions">
+        <!-- Le contenu de ce bouton (lune ou soleil) est rempli par theme.js -->
+        <button class="theme-btn" id="themeBtn" type="button"></button>
+        <a class="btn small" href="#inscription">Créer mon carnet</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO : le titre et l'aperçu du carnet ============ -->
+    <section class="wrap hero">
+      <div>
+        <h1><span>Ses soins.</span> <span>Ses souvenirs.</span> <span>Son histoire.</span></h1>
+        <p class="lead">Le carnet de santé et de souvenirs de votre chien, chat ou NAC. Vaccins, poids, ordonnances et plus beaux moments, au même endroit.</p>
+        <div class="cta-row">
+          <a class="btn" href="#inscription">Commencer gratuitement</a>
+          <a class="btn ghost" href="#tarifs">Découvrir Premium</a>
+        </div>
+        <small>Gratuit pour un animal. Sans carte bancaire.</small>
+      </div>
+
+      <!-- Aperçu interactif : les zones vides sont remplies par main.js -->
+      <div class="demo" aria-label="Aperçu du carnet">
+        <p class="demo-label">Essayez l'aperçu : choisissez un animal</p>
+        <div class="species" id="species" role="group" aria-label="Espèce de l'animal"></div>
+
+        <div class="pet-head">
+          <div class="avatar" id="avatar" aria-hidden="true"></div>
+          <div><strong id="petName"></strong><span id="petInfo"></span></div>
+        </div>
+
+        <div class="tabs" role="tablist" aria-label="Sections du carnet">
+          <button class="chip" role="tab" id="tab-sante" aria-controls="panel-sante" aria-selected="true">Santé</button>
+          <button class="chip" role="tab" id="tab-souv" aria-controls="panel-souv" aria-selected="false">Souvenirs</button>
+        </div>
+
+        <div class="panel" id="panel-sante" role="tabpanel" aria-labelledby="tab-sante">
+          <ul class="remind" id="remind"></ul>
+          <div class="weight">
+            <h4 id="weightTitle">Poids</h4>
+            <div id="chart"></div>
+          </div>
+        </div>
+
+        <div class="panel" id="panel-souv" role="tabpanel" aria-labelledby="tab-souv" hidden>
+          <ul class="timeline" id="timeline"></ul>
+        </div>
+
+        <p class="fine">Exemple fictif. Le carnet ne remplace pas l'avis de votre vétérinaire.</p>
+      </div>
+    </section>
+
+    <!-- ============ FONCTIONS ============ -->
+    <section class="block wrap" id="fonctions">
+      <h2>Tout ce qu'il faut garder, rien de plus.</h2>
+      <p class="intro">Un carnet que vous remplissez en quelques secondes et que vous retrouvez sur votre téléphone, chez le vétérinaire comme à la maison.</p>
+      <div class="features">
+        <article class="feature"><h3>Le suivi de santé</h3><p>Vaccins, vermifuges, traitements, ordonnances et rendez-vous, avec un rappel avant chaque échéance.</p></article>
+        <article class="feature"><h3>La courbe de poids</h3><p>Notez une pesée en deux touches et suivez l'évolution, en kilos ou en grammes selon l'espèce.</p></article>
+        <article class="feature"><h3>Le carnet de souvenirs</h3><p>Photos, premières fois, anecdotes et anniversaires, classés par date dans une frise.</p></article>
+        <article class="feature nac"><h3>Pensé aussi pour les NAC</h3><p>Lapin, furet, cochon d'Inde, tortue, oiseau : chaque espèce a ses propres rubriques, pas seulement celles d'un chien ou d'un chat.</p></article>
+      </div>
+    </section>
+
+    <!-- ============ TARIFS ============ -->
+    <section class="block wrap" id="tarifs">
+      <h2>Gratuit pour commencer, Premium pour aller plus loin.</h2>
+      <p class="intro">Le carnet de base reste gratuit. Premium s'adresse aux foyers qui ont plusieurs animaux ou qui veulent tout partager.</p>
+
+      <div class="billing" role="group" aria-label="Période de facturation">
+        <button id="bMonth" aria-pressed="false">Mensuel</button>
+        <button id="bYear" aria-pressed="true">Annuel</button>
+      </div>
+
+      <div class="plans">
+        <article class="plan">
+          <h3>Gratuit</h3>
+          <div class="price">0 €</div>
+          <p class="sub">Pour toujours</p>
+          <ul>
+            <li>1 animal</li>
+            <li>Vaccins, traitements et pesées</li>
+            <li>Rappels par e-mail</li>
+            <li>30 photos de souvenirs</li>
+            <li class="off">Export PDF pour le vétérinaire</li>
+            <li class="off">Partage avec la famille</li>
+          </ul>
+          <a class="btn ghost full" href="#inscription" data-plan="gratuit">Créer un carnet gratuit</a>
+        </article>
+
+        <article class="plan premium">
+          <h3>Premium <span class="badge">Le plus complet</span></h3>
+          <!-- Le prix change quand on clique sur Mensuel / Annuel (voir main.js) -->
+          <div class="price"><span id="priceValue">39 €</span> <small id="priceUnit">par an</small></div>
+          <p class="sub" id="priceNote">Soit 3,25 € par mois</p>
+          <ul>
+            <li>Animaux en nombre illimité</li>
+            <li>Photos et vidéos illimitées</li>
+            <li>Export PDF du dossier de santé</li>
+            <li>Partage avec la famille ou la pension</li>
+            <li>Rappels par notification</li>
+            <li>Livre de souvenirs à imprimer</li>
+          </ul>
+          <a class="btn light full" href="#inscription" data-plan="premium">Essayer Premium 14 jours</a>
+        </article>
+      </div>
+      <p class="fine plans-note">Prix et contenus à titre d'exemple : ajustez-les avant la mise en ligne.</p>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <!-- <details> / <summary> : un accordéon natif, sans aucun JavaScript -->
+    <section class="block wrap" id="faq">
+      <h2>Questions fréquentes</h2>
+      <details><summary>Quels animaux puis-je ajouter ?</summary><p>Chiens et chats, mais aussi lapins, furets, cochons d'Inde, hamsters, oiseaux, reptiles et tortues. Les rubriques s'adaptent à l'espèce.</p></details>
+      <details><summary>Pawly remplace-t-il le carnet de santé officiel ?</summary><p>Non. C'est un complément pratique pour tout retrouver et partager. Le carnet de vaccination ou le passeport officiel de votre animal restent ceux que remplit votre vétérinaire.</p></details>
+      <details><summary>Puis-je arrêter Premium quand je veux ?</summary><p>Oui. Vous gardez vos données et repassez à l'offre gratuite. Au-delà d'un animal, les autres restent consultables mais ne sont plus modifiables.</p></details>
+      <details><summary>Mes photos et mes données sont-elles privées ?</summary><p>Votre carnet n'est visible que par vous et les personnes avec qui vous choisissez de le partager.</p></details>
+    </section>
+
+    <!-- ============ INSCRIPTION ============ -->
+    <section class="wrap" id="inscription">
+      <div class="signup">
+        <div>
+          <h2>Créez le carnet de votre compagnon.</h2>
+          <p>Laissez votre e-mail : on vous prévient dès l'ouverture et vous choisissez votre offre.</p>
+        </div>
+        <div id="signupBox">
+          <form id="signupForm" novalidate>
+            <label>Adresse e-mail
+              <input name="email" type="email" autocomplete="email" required>
+              <span class="err" id="errEmail"></span>
+            </label>
+            <label>Votre animal
+              <select name="animal"></select>
+            </label>
+            <label>Offre souhaitée
+              <select name="plan" id="planSelect">
+                <option value="gratuit">Gratuit</option>
+                <option value="premium">Premium, 14 jours d'essai</option>
+              </select>
+            </label>
+            <button class="btn light full" type="submit">Créer mon carnet</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PIED DE PAGE ============ -->
+  <footer class="site">
+    <div class="wrap">
+      <div class="foot-brand">
+        <span class="lm lm-mark" role="img" aria-label="Logo Pawly"></span>
+        <div><strong>Pawly</strong>Ses soins. Ses souvenirs. Son histoire.</div>
+      </div>
+      <span>Mentions légales – CGU – Confidentialité – Contact</span>
+    </div>
+    <div class="wrap footer-bottom"><span>© 2026 Pawly</span></div>
+  </footer>
+
+  <!-- Les scripts en fin de page : le HTML est déjà chargé quand ils s'exécutent.
+       L'ordre compte : donnees.js crée PETS et PRICES, que main.js utilise. -->
+  <script src="js/donnees.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
